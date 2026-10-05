@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krushna Bagul — Computer Engineering Student & Developer</title>
+  <meta name="description" content="Personal portfolio of Krushna Bagul, Computer Engineering Student and Software Developer. Building practical digital experiences through code, design, and problem solving.">
+  
+  <!-- Modern Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Portfolio Styling -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="intro-active">
+
+  <!-- Fullscreen Cinematic Flash Overlay -->
+  <div id="flash-overlay"></div>
+
+  <!-- Subtle Deep Atmosphere & Grain -->
+  <div class="bg-atmosphere"></div>
+  <div class="bg-noise"></div>
+
+  <!-- Fixed Minimal Navigation -->
+  <header class="nav-header">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand">
+        KB <span class="accent">/ 01</span>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <!-- The Single Continuous Particle Canvas (KRUSHNA is generated & moved here) -->
+      <canvas id="hero-canvas"></canvas>
+
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Left: Hero Role & Content (Revealed after particle KRUSHNA settles) -->
+          <div class="hero-content">
+            <!-- Settled Particle KRUSHNA Anchor Slot (Lowers position right above badge) -->
+            <div class="hero-name-anchor"></div>
+
+            <div class="hero-badge">
+              <span class="pulse-dot"></span>
+              Computer Engineering Student
+            </div>
+
+            <h1 class="hero-tagline">
+              Developer · Problem Solver
+            </h1>
+
+            <p class="hero-desc">
+              Building practical digital experiences through code, design and problem solving.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">Explore Work</a>
+              <a href="#contact" class="btn btn-secondary">Contact</a>
+            </div>
+          </div>
+
+          <!-- Right: Cinematic Futuristic Visual -->
+          <div class="hero-visual-wrapper">
+            <div class="hero-visual-frame">
+              <span class="corner-bracket bracket-tl"></span>
+              <span class="corner-bracket bracket-tr"></span>
+              <span class="corner-bracket bracket-bl"></span>
+              <span class="corner-bracket bracket-br"></span>
+
+              <img 
+                src="assets/hero-cinematic.jpg" 
+                alt="Cinematic futuristic environment with glowing portal and atmospheric depth" 
+                class="hero-visual-img"
+                loading="eager"
+              >
+
+              <div class="visual-caption">
+                <span>ENV // 01</span>
+                <span>DIGITAL_HORIZON</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-index">01 — IDENTITY</div>
+          <h2 class="section-title">ABOUT</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-main">
+            <p class="about-statement">
+              I build web experiences and practical software projects with a focus on clean interfaces, useful interactions and strong visual presentation.
+            </p>
+            <p class="about-bio">
+              As a Computer Engineering student, I enjoy bridging frontend engineering with structured logic. Whether developing complete academic systems, spatial data tools, or dynamic web applications, I prioritize maintainable architectures, clean typography, and intuitive user experiences.
+            </p>
+
+            <div class="about-tags">
+              <span class="tag tag-accent">Frontend Development</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML / CSS</span>
+              <span class="tag">C / C++</span>
+              <span class="tag">Python</span>
+              <span class="tag">Git &amp; GitHub</span>
+              <span class="tag">UI / UX</span>
+              <span class="tag">Problem Solving</span>
+            </div>
+          </div>
+
+          <div class="about-pillars">
+            <div class="pillar-card">
+              <div class="pillar-label">Focus // 01</div>
+              <div class="pillar-title">Web &amp; Frontend Engineering</div>
+              <p class="pillar-desc">Designing modern, responsive interfaces with modular code, smooth micro-interactions, and accessible layouts.</p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-label">Focus // 02</div>
+              <div class="pillar-title">Practical Software Solutions</div>
+              <p class="pillar-desc">Developing real-world workflows that turn administrative or analytical requirements into intuitive digital tools.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-index">02 — TECHNICAL FOUNDATION</div>
+          <h2 class="section-title">SKILLS</h2>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Category 1: Frontend -->
+          <div class="skill-category">
+            <div class="category-name">Frontend</div>
+            <ul class="skill-list">
+              <li class="skill-item">HTML5 &amp; Semantic Web</li>
+              <li class="skill-item">CSS3 &amp; Modern Layouts</li>
+              <li class="skill-item">JavaScript (ES6+)</li>
+              <li class="skill-item">DOM Manipulation</li>
+              <li class="skill-item">Responsive Design</li>
+            </ul>
+          </div>
+
+          <!-- Category 2: Programming -->
+          <div class="skill-category">
+            <div class="category-name">Programming</div>
+            <ul class="skill-list">
+              <li class="skill-item">C</li>
+              <li class="skill-item">C++</li>
+              <li class="skill-item">Python</li>
+              <li class="skill-item">Object-Oriented Logic</li>
+            </ul>
+          </div>
+
+          <!-- Category 3: Tools -->
+          <div class="skill-category">
+            <div class="category-name">Tools</div>
+            <ul class="skill-list">
+              <li class="skill-item">Git Version Control</li>
+              <li class="skill-item">GitHub</li>
+              <li class="skill-item">VS Code</li>
+              <li class="skill-item">Browser DevTools</li>
+            </ul>
+          </div>
+
+          <!-- Category 4: Concepts -->
+          <div class="skill-category">
+            <div class="category-name">Concepts</div>
+            <ul class="skill-list">
+              <li class="skill-item">Problem Solving</li>
+              <li class="skill-item">Basic DSA</li>
+              <li class="skill-item">UI / UX Principles</li>
+              <li class="skill-item">Clean Code Practices</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK / PROJECTS SECTION -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-index">03 — PROJECTS</div>
+          <h2 class="section-title">SELECTED WORK</h2>
+        </div>
+
+        <div class="projects-grid">
+          
+          <!-- Project 01: Syllabus Booklet Management System -->
+          <div class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">01 // PROJECT</span>
+                <span class="project-category-badge">Academic Management</span>
+              </div>
+              <h3 class="project-title">Syllabus Booklet Management System</h3>
+              <p class="project-desc">
+                A web-based system for managing course syllabus information through teacher and administrator workflows and generating the final syllabus booklet. Includes individual subject teacher login, assigned syllabus entry/submission, admin course assignment, centralized data collection, and administrative PDF booklet compilation.
+              </p>
+              <div class="project-tech">
+                <span class="tech-pill">HTML</span>
+                <span class="tech-pill">CSS</span>
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">Backend</span>
+                <span class="tech-pill">Database</span>
+                <span class="tech-pill">PDF Generation</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/krushna1-web" target="_blank" rel="noopener noreferrer" class="project-link">
+                GitHub <span>↗</span>
+              </a>
+              <a href="#contact" class="project-link">
+                Details <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 02: Disaster Risk Platform -->
+          <div class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">02 // PROJECT</span>
+                <span class="project-category-badge">GIS &amp; Analytics</span>
+              </div>
+              <h3 class="project-title">Disaster Risk Platform</h3>
+              <p class="project-desc">
+                A GIS and machine-learning-oriented platform focused on identifying disaster risk zones and supporting safer relocation planning. Features risk mapping, GIS environmental layers, population exposure assessment, and data-driven relocation zone identification with a regional risk-management focus.
+              </p>
+              <div class="project-tech">
+                <span class="tech-pill">GIS</span>
+                <span class="tech-pill">Machine Learning</span>
+                <span class="tech-pill">Data Analysis</span>
+                <span class="tech-pill">Mapping</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/krushna1-web" target="_blank" rel="noopener noreferrer" class="project-link">
+                GitHub <span>↗</span>
+              </a>
+              <a href="#contact" class="project-link">
+                Overview <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 03: Velora -->
+          <div class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">03 // PROJECT</span>
+                <span class="project-category-badge">EdTech Platform</span>
+              </div>
+              <h3 class="project-title">Velora</h3>
+              <p class="project-desc">
+                A teaching and learning platform designed to provide a more engaging digital learning experience. Built as an interactive educational tutor and digital collaborative space for students and educators.
+              </p>
+              <div class="project-tech">
+                <span class="tech-pill">Web</span>
+                <span class="tech-pill">Education</span>
+                <span class="tech-pill">AI</span>
+                <span class="tech-pill">Hackathon</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/krushna1-web" target="_blank" rel="noopener noreferrer" class="project-link">
+                GitHub <span>↗</span>
+              </a>
+              <a href="#contact" class="project-link">
+                Details <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 04: Tic Tac Toe -->
+          <div class="project-card">
+            <div>
+              <div class="project-top">
+                <span class="project-num">04 // PROJECT</span>
+                <span class="project-category-badge">Interactive Logic</span>
+              </div>
+              <h3 class="project-title">Tic Tac Toe</h3>
+              <p class="project-desc">
+                A JavaScript-based interactive game demonstrating DOM manipulation, modular game logic, turn management, and dynamic UI interaction with responsive states.
+              </p>
+              <div class="project-tech">
+                <span class="tech-pill">HTML</span>
+                <span class="tech-pill">CSS</span>
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">DOM</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/krushna1-web" target="_blank" rel="noopener noreferrer" class="project-link">
+                GitHub <span>↗</span>
+              </a>
+              <a href="#contact" class="project-link">
+                Code <span>→</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-index">04 — CAPABILITY</div>
+          <h2 class="section-title">EXPERIENCE</h2>
+        </div>
+
+        <div class="experience-list">
+          
+          <!-- Item 1: Internship (Editable placeholder as requested) -->
+          <div class="experience-card">
+            <div class="exp-header">
+              <div class="exp-title-group">
+                <h3>Software Development Intern <span class="placeholder-badge">EDITABLE PLACEHOLDER</span></h3>
+                <div class="exp-company">[Company / Organization Name]</div>
+              </div>
+              <div class="exp-date">[Duration — e.g. June 2026 – August 2026]</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Engineered clean, responsive user interfaces and modular frontend components using modern web standards.</li>
+              <li>Collaborated with technical team members on code reviews, debugging, and cross-browser performance tuning.</li>
+              <li>Participated in feature implementation, component testing, and structured project documentation.</li>
+            </ul>
+          </div>
+
+          <!-- Item 2: ACM / College Technical Activity -->
+          <div class="experience-card">
+            <div class="exp-header">
+              <div class="exp-title-group">
+                <h3>Technical Member &amp; Web Contributor</h3>
+                <div class="exp-company">ACM Student Chapter / College Technical Committee</div>
+              </div>
+              <div class="exp-date">Academic Term</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Contributed to event website development, frontend styling, and digital asset integration for technical fests.</li>
+              <li>Collaborated on student technical workshops, hackathon organizing committees, and coding challenges.</li>
+              <li>Maintained code repositories and supported technical presentations for collegiate events.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-index">05 — CONTACT</div>
+          <h2 class="section-title">LET'S CONNECT</h2>
+        </div>
+
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h3>Get in touch</h3>
+            <p>
+              I am open to internship opportunities, software development roles, and technical collaborations. Feel free to reach out via email or explore my repositories on GitHub.
+            </p>
+            <a href="mailto:kgbagul246@gmail.com" class="btn btn-primary">Email Me</a>
+          </div>
+
+          <div class="contact-actions">
+            <a href="https://github.com/krushna1-web" target="_blank" rel="noopener noreferrer" class="contact-link-row">
+              <span>GITHUB // krushna1-web</span>
+              <span class="arrow">↗</span>
+            </a>
+            <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="contact-link-row">
+              <span>LINKEDIN // krushna-bagul <span class="placeholder-badge">LINK</span></span>
+              <span class="arrow">↗</span>
+            </a>
+            <a href="#contact" class="contact-link-row">
+              <span>RESUME // view-pdf <span class="placeholder-badge">FILE</span></span>
+              <span class="arrow">↓</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>KRUSHNA BAGUL / PORTFOLIO &nbsp;·&nbsp; 2026</div>
+        <div>Designed &amp; Engineered with clean code and cinematic aesthetics</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
