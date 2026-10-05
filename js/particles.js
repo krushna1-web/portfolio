@@ -309,6 +309,11 @@
     dawnStartTime = performance.now();
     computeHeaderAnchor();
 
+    // Trigger mountain canvas morning dawn sunrise bloom
+    if (typeof window.triggerMountainDawn === 'function') {
+      window.triggerMountainDawn();
+    }
+
     // Trigger soft morning sunlight overlay
     if (flashOverlay) {
       flashOverlay.style.transition = 'opacity 0.25s ease-out';

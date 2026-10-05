@@ -19,8 +19,12 @@
   <!-- Fullscreen Cinematic Flash Overlay -->
   <div id="flash-overlay"></div>
 
-  <!-- Subtle Deep Atmosphere & Grain -->
-  <div class="bg-atmosphere"></div>
+  <!-- Whole Mountain Picture Background & Dynamic Dawn VFX Canvas -->
+  <div class="bg-atmosphere">
+    <div class="bg-mountain-image" id="bg-mountain-img"></div>
+    <canvas id="dawn-mountain-canvas"></canvas>
+    <div class="bg-mountain-vignette"></div>
+  </div>
   <div class="bg-noise"></div>
 
   <!-- Fixed Minimal Navigation -->
@@ -62,9 +66,14 @@
             <!-- Settled Particle KRUSHNA Anchor Slot (Lowers position right above badge) -->
             <div class="hero-name-anchor"></div>
 
-            <div class="hero-badge">
-              <span class="pulse-dot"></span>
-              Computer Engineering Student
+            <div class="hero-badge-group">
+              <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                Computer Engineering Student
+              </div>
+              <div class="mountain-time-pill" id="mountain-time-badge">
+                <span class="time-dot"></span> 04:00 AM // SUMMIT DAWN SESSIONS · ALT 3,200M
+              </div>
             </div>
 
             <h1 class="hero-tagline">
@@ -81,29 +90,13 @@
             </div>
           </div>
 
-          <!-- Right: Cinematic Futuristic Visual -->
-          <div class="hero-visual-wrapper">
-            <div class="hero-visual-frame">
-              <span class="corner-bracket bracket-tl"></span>
-              <span class="corner-bracket bracket-tr"></span>
-              <span class="corner-bracket bracket-bl"></span>
-              <span class="corner-bracket bracket-br"></span>
-
-              <img 
-                src="assets/hero-cinematic.jpg" 
-                alt="Cinematic futuristic environment with glowing portal and atmospheric depth" 
-                class="hero-visual-img"
-                loading="eager"
-              >
-
-              <div class="visual-caption">
-                <span>ENV // 01</span>
-                <span>DIGITAL_HORIZON</span>
-              </div>
-            </div>
-          </div>
-
         </div>
+      </div>
+
+      <!-- Minimal Mountain Summit HUD Overlay -->
+      <div class="mountain-summit-hud">
+        <span class="hud-blink"></span>
+        <span>SUMMIT // 04:00 AM · ALT 3,200M · FIRST LIGHT</span>
       </div>
     </section>
 
@@ -430,6 +423,7 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="js/mountain-dawn.js"></script>
   <script src="js/particles.js"></script>
   <script src="js/main.js"></script>
 </body>

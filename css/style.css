@@ -78,16 +78,48 @@ body.intro-active {
   transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Background Atmosphere (Subtle deep glow & grid lines) */
+/* Background Atmosphere (Whole Mountain Picture & Dynamic Dawn Canvas Container) */
 .bg-atmosphere {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  background: #03060f;
+  overflow: hidden;
+}
+
+.bg-mountain-image {
+  position: absolute;
+  inset: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  background-image: url('../assets/hero-cinematic.jpg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  opacity: 0.92;
+  transform: scale(1.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+#dawn-mountain-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bg-mountain-vignette {
+  position: absolute;
+  inset: 0;
   background: 
-    radial-gradient(circle at 80% 20%, rgba(30, 41, 59, 0.15) 0%, transparent 60%),
-    radial-gradient(circle at 20% 80%, rgba(15, 23, 42, 0.25) 0%, transparent 50%),
-    #050505;
+    linear-gradient(90deg, rgba(3, 6, 15, 0.92) 0%, rgba(3, 6, 15, 0.75) 36%, rgba(3, 6, 15, 0.15) 70%, rgba(3, 6, 15, 0.3) 100%),
+    linear-gradient(180deg, rgba(3, 6, 15, 0.55) 0%, transparent 22%, transparent 68%, rgba(5, 5, 5, 0.98) 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Noise overlay */
@@ -244,13 +276,14 @@ body.intro-active {
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 3.5rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
+  max-width: 660px;
   min-height: calc(100vh - 5rem);
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 /* Hero Content (Left) */
@@ -273,7 +306,15 @@ body.intro-active {
   pointer-events: none;
 }
 
-/* Role Label & Subtitle */
+/* Role Badge & 4 AM Mountain Session Group */
+.hero-badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -287,7 +328,6 @@ body.intro-active {
   border: 1px solid rgba(52, 211, 153, 0.25);
   padding: 0.4rem 0.9rem;
   border-radius: 4px;
-  margin-bottom: 1.5rem;
 }
 
 .hero-badge .pulse-dot {
@@ -297,6 +337,43 @@ body.intro-active {
   background: var(--accent-energy);
   box-shadow: 0 0 8px var(--accent-energy);
   animation: pulse 2s infinite ease-in-out;
+}
+
+.mountain-time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  color: #7dd3fc;
+  background: rgba(14, 23, 42, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 0.4rem 0.85rem;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.mountain-time-pill .time-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.mountain-time-pill .time-dot.dawn {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.mountain-time-pill .time-dot.active {
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
 }
 
 @keyframes pulse {
@@ -371,78 +448,45 @@ body.intro-active {
   transform: translateY(-2px);
 }
 
-/* Cinematic Hero Visual (Right) */
-.hero-visual-wrapper {
-  position: relative;
-  z-index: 35;
-  opacity: 0;
-  transform: scale(1.04);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-visual-wrapper.revealed {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.hero-visual-frame {
-  position: relative;
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background: #08080a;
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.8),
-    0 0 40px rgba(52, 211, 153, 0.08);
-}
-
-.hero-visual-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.8s ease;
-}
-
-.hero-visual-frame:hover .hero-visual-img {
-  transform: scale(1.02);
-}
-
-/* Subtle corner technical brackets */
-.corner-bracket {
+/* Mountain Summit Watermark HUD (Floating on bottom right over the mountain picture) */
+.mountain-summit-hud {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: rgba(255, 255, 255, 0.3);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.bracket-tl { top: 8px; left: 8px; border-top: 1px solid; border-left: 1px solid; }
-.bracket-tr { top: 8px; right: 8px; border-top: 1px solid; border-right: 1px solid; }
-.bracket-bl { bottom: 8px; left: 8px; border-bottom: 1px solid; border-left: 1px solid; }
-.bracket-br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
-
-/* Micro technical overlay */
-.visual-caption {
-  position: absolute;
-  bottom: 12px;
-  left: 14px;
+  bottom: 2.2rem;
+  right: 2.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(5, 5, 5, 0.6);
-  padding: 0.25rem 0.6rem;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: #e0f2fe;
+  background: rgba(3, 7, 18, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 0.45rem 0.95rem;
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.mountain-summit-hud .hud-blink {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulse 1.8s infinite ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .mountain-summit-hud {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    font-size: 0.62rem;
+    padding: 0.35rem 0.7rem;
+  }
 }
 
 /* ============================================================
