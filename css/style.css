@@ -64,15 +64,18 @@ body.intro-active {
   height: 100vh;
 }
 
-/* Fullscreen Flash Overlay */
+/* 4 AM Dawn Sunlight Transition Overlay */
 #flash-overlay {
   position: fixed;
   inset: 0;
-  background: #ffffff;
-  opacity: 0;
   pointer-events: none;
   z-index: 9999;
-  transition: opacity 0.15s ease-out;
+  opacity: 0;
+  background: 
+    radial-gradient(ellipse at 50% 50%, rgba(255, 235, 195, 0.92) 0%, rgba(255, 185, 100, 0.6) 32%, rgba(110, 150, 210, 0.28) 62%, rgba(5, 5, 12, 0.8) 100%),
+    linear-gradient(180deg, rgba(255, 200, 130, 0.35) 0%, rgba(20, 30, 55, 0.4) 100%);
+  mix-blend-mode: screen;
+  transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Background Atmosphere (Subtle deep glow & grid lines) */

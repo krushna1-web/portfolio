@@ -1,16 +1,16 @@
 /**
  * KRUSHNA BAGUL — CINEMATIC PARTICLE ENGINE
- * Silky-Smooth Cinematic Kinetic Transition
  * 
  * Choreography:
- * 1. 0.0s - 0.4s: Pure black screen
- * 2. 0.4s - 2.8s: White particles smoothly converge and form "KRUSHNA"
- * 3. 2.8s - 3.8s: Brief pause to appreciate the formed particle typography
- * 4. 3.8s - 4.8s: Electrical lightning energy charges the particle typography
- * 5. 4.8s - 5.8s: Soft cinematic white bloom flash
- * 6. 5.1s - 7.5s: EXACT SAME particles glide with smooth easeInOutCubic to upper-left
- * 7. 6.4s+: Hero image and role content smoothly fade in
- * 8. 7.5s+: Settled with continuous subtle ambient floating shimmer
+ * 1. 0.0s - 0.5s: White dots appear scattered across the COMPLETE SCREEN
+ * 2. 0.5s - 3.0s: Dots fly in from all directions across the whole screen and crisply form "KRUSHNA"
+ * 3. 3.0s - 4.0s: Calm appreciation pause with ambient breathing
+ * 4. 4.0s - 5.0s: Electric energy & lightning crackles through typography
+ * 5. 5.0s - 7.5s: 4 AM SUNLIGHT DAWN TRANSITION:
+ *    - Soft morning golden-dawn sunflare & horizon beam blooms across screen
+ *    - THE EXACT SAME particles glide smoothly to the lower-left identity position
+ *    - Hero visual & role content emerge bathed in morning light
+ * 6. 7.5s+: Settled with continuous ambient particle shimmer
  */
 
 (function () {
@@ -21,7 +21,7 @@
   const ctx = canvas.getContext('2d');
   const flashOverlay = document.getElementById('flash-overlay');
 
-  // Animation States: 'black' -> 'forming' -> 'formed' -> 'energy' -> 'flash' -> 'moving' -> 'settled'
+  // Animation States: 'black' -> 'forming' -> 'formed' -> 'energy' -> 'dawn' -> 'settled'
   let state = 'black';
   let startTime = null;
   let particles = [];
@@ -32,8 +32,8 @@
   let viewportHeight = window.innerHeight;
 
   // Kinetic transition coordinates and timing
-  let moveStartTime = 0;
-  const moveDuration = 2200; // 2.2s ultra-smooth cinematic glide
+  let dawnStartTime = 0;
+  const dawnDuration = 2400; // 2.4s morning dawn sunlight transition & glide
   let finalScale = 0.38;
   let finalCenterX = 0;
   let finalCenterY = 0;
@@ -44,7 +44,6 @@
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  // Smooth ease-out for initial formation
   function easeOutCubic(t) {
     return 1 - Math.pow(1 - t, 3);
   }
@@ -59,9 +58,11 @@
 
   // Particle Class
   class Particle {
-    constructor(startX, startY, centerTargetX, centerTargetY, relX, relY) {
+    constructor(startX, startY, midX, midY, centerTargetX, centerTargetY, relX, relY, delay) {
       this.startX = startX;
       this.startY = startY;
+      this.midX = midX;
+      this.midY = midY;
       
       this.x = startX;
       this.y = startY;
@@ -74,7 +75,7 @@
       this.relX = relX;
       this.relY = relY;
 
-      // Transformation capture coordinates
+      // Glide coordinates
       this.fromX = startX;
       this.fromY = startY;
       this.toX = centerTargetX;
@@ -85,6 +86,7 @@
       this.size = this.baseSize;
       this.baseAlpha = Math.random() * 0.3 + 0.7;
       this.alpha = 0;
+      this.delay = delay;
       this.seed = Math.random() * 1000;
     }
 
@@ -120,7 +122,7 @@
     const pixels = imgData.data;
     const points = [];
 
-    // Step spacing for clean, high-density particle typography
+    // Step spacing for high-density particle typography
     const step = viewportWidth < 768 ? 4 : 5;
 
     for (let y = 0; y < off.height; y += step) {
@@ -152,7 +154,7 @@
     ctx.scale(dpr, dpr);
   }
 
-  // Calculate Header Target Alignment in sync with page container
+  // Calculate Header Target Alignment with hero-name-anchor slot
   function computeHeaderAnchor() {
     finalScale = viewportWidth < 768 ? 0.34 : 0.38;
     const halfWidth = (textPointsData.textWidth * finalScale) / 2;
@@ -175,7 +177,7 @@
     }
   }
 
-  // Initialize Particles
+  // Initialize Particles Scattered across the WHOLE COMPLETE SCREEN
   let textPointsData = null;
   function initParticles() {
     const centerFontSize = getCenterFontSize();
@@ -185,16 +187,20 @@
     const centerY = viewportHeight / 2;
 
     particles = textPointsData.points.map(pt => {
-      // Scatter from random points across the screen
-      const angle = Math.random() * Math.PI * 2;
-      const distance = Math.random() * Math.max(viewportWidth, viewportHeight) * 0.6 + 60;
-      const startX = centerX + Math.cos(angle) * distance;
-      const startY = centerY + Math.sin(angle) * distance;
+      // Scatter randomly across the ENTIRE viewport (including corners and edges)
+      const startX = Math.random() * (viewportWidth + 80) - 40;
+      const startY = Math.random() * (viewportHeight + 80) - 40;
 
       const centerTargetX = centerX + pt.relX;
       const centerTargetY = centerY + pt.relY;
 
-      return new Particle(startX, startY, centerTargetX, centerTargetY, pt.relX, pt.relY);
+      // Organic curved waypoint for graceful flight paths
+      const midX = (startX + centerTargetX) / 2 + (Math.random() - 0.5) * Math.min(viewportWidth, viewportHeight) * 0.35;
+      const midY = (startY + centerTargetY) / 2 + (Math.random() - 0.5) * Math.min(viewportWidth, viewportHeight) * 0.35;
+
+      const delay = Math.random() * 0.2; // subtle staggered start
+
+      return new Particle(startX, startY, midX, midY, centerTargetX, centerTargetY, pt.relX, pt.relY, delay);
     });
   }
 
@@ -244,33 +250,83 @@
     ctx.restore();
   }
 
-  // Trigger Cinematic Flash and Begin Silky Glide
-  function triggerCinematicFlash() {
-    state = 'flash';
+  // 4 AM Dawn Sunlight Bloom Effect
+  function draw4AMSunlight(progress) {
+    if (progress <= 0 || progress >= 1) return;
 
-    if (flashOverlay) {
-      flashOverlay.style.transition = 'opacity 0.22s ease-out';
-      flashOverlay.style.opacity = '0.88';
+    // Intensity curve: rises gently to peak at progress ~0.3, then softly dissolves
+    const intensity = progress < 0.32
+      ? Math.sin((progress / 0.32) * Math.PI / 2)
+      : Math.pow(Math.cos(((progress - 0.32) / 0.68) * Math.PI / 2), 1.5);
 
-      setTimeout(() => {
-        flashOverlay.style.transition = 'opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1)';
-        flashOverlay.style.opacity = '0';
-      }, 220);
+    if (intensity <= 0.01) return;
+
+    ctx.save();
+    const cx = viewportWidth / 2;
+    const cy = viewportHeight / 2;
+
+    // 1. Warm radial sunrise bloom (Golden Dawn Light)
+    const maxRadius = Math.max(viewportWidth, viewportHeight) * 0.9;
+    const radGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxRadius);
+    radGrad.addColorStop(0, `rgba(255, 240, 205, ${(0.82 * intensity).toFixed(3)})`);
+    radGrad.addColorStop(0.2, `rgba(255, 190, 110, ${(0.6 * intensity).toFixed(3)})`);
+    radGrad.addColorStop(0.45, `rgba(240, 140, 60, ${(0.32 * intensity).toFixed(3)})`);
+    radGrad.addColorStop(0.7, `rgba(70, 110, 180, ${(0.16 * intensity).toFixed(3)})`);
+    radGrad.addColorStop(1, 'rgba(5, 5, 10, 0)');
+
+    ctx.fillStyle = radGrad;
+    ctx.fillRect(0, 0, viewportWidth, viewportHeight);
+
+    // 2. Horizontal 4 AM Dawn Horizon Light Beam
+    const beamHeight = 90 * (1 + intensity * 1.5);
+    const beamGrad = ctx.createLinearGradient(0, cy - beamHeight, 0, cy + beamHeight);
+    beamGrad.addColorStop(0, 'rgba(255, 200, 120, 0)');
+    beamGrad.addColorStop(0.5, `rgba(255, 245, 220, ${(0.65 * intensity).toFixed(3)})`);
+    beamGrad.addColorStop(1, 'rgba(255, 200, 120, 0)');
+
+    ctx.fillStyle = beamGrad;
+    ctx.fillRect(0, cy - beamHeight, viewportWidth, beamHeight * 2);
+
+    // 3. Soft golden dawn rays
+    const rayCount = 8;
+    ctx.strokeStyle = `rgba(255, 230, 180, ${(0.22 * intensity).toFixed(3)})`;
+    ctx.lineWidth = 2.5;
+    for (let i = 0; i < rayCount; i++) {
+      const angle = (i / rayCount) * Math.PI * 2 + (progress * 0.18);
+      const length = maxRadius * 0.7;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(angle) * length, cy + Math.sin(angle) * length);
+      ctx.stroke();
     }
 
-    // Capture exact particle departure points for smooth mathematical interpolation
-    setTimeout(() => {
-      state = 'moving';
-      moveStartTime = performance.now();
-      computeHeaderAnchor();
+    ctx.restore();
+  }
 
-      particles.forEach(p => {
-        p.fromX = p.x;
-        p.fromY = p.y;
-        p.toX = finalCenterX + p.relX * finalScale;
-        p.toY = finalCenterY + p.relY * finalScale;
-      });
-    }, 280);
+  // Trigger 4 AM Sunlight Dawn Transition and Begin Silky Glide
+  function triggerDawnTransition() {
+    state = 'dawn';
+    dawnStartTime = performance.now();
+    computeHeaderAnchor();
+
+    // Trigger soft morning sunlight overlay
+    if (flashOverlay) {
+      flashOverlay.style.transition = 'opacity 0.25s ease-out';
+      flashOverlay.style.opacity = '0.85';
+
+      setTimeout(() => {
+        flashOverlay.style.transition = 'opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        flashOverlay.style.opacity = '0';
+      }, 250);
+    }
+
+    // Capture particle departure coordinates for mathematical cubic interpolation
+    particles.forEach(p => {
+      p.fromX = p.x;
+      p.fromY = p.y;
+      p.toX = finalCenterX + p.relX * finalScale;
+      p.toY = finalCenterY + p.relY * finalScale;
+    });
   }
 
   // Smooth UI Reveal
@@ -298,29 +354,48 @@
     // Clear frame
     ctx.clearRect(0, 0, viewportWidth, viewportHeight);
 
-    // 1. Initial Black pause (0s -> 0.35s)
-    if (state === 'black' && elapsed > 350) {
-      state = 'forming';
-    }
-
-    // 2. Smooth Formation Phase (0.35s -> 2.6s)
-    if (state === 'forming') {
-      const formProgress = Math.min(1, (elapsed - 350) / 2250);
-      const ease = easeOutCubic(formProgress);
-
+    // 1. Initial State (0s -> 0.5s): Dots twinkle across the WHOLE SCREEN
+    if (state === 'black') {
+      const introFade = Math.min(1, elapsed / 450);
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.x = p.startX + (p.centerTargetX - p.startX) * ease;
-        p.y = p.startY + (p.centerTargetY - p.startY) * ease;
-        p.alpha = Math.min(p.baseAlpha, ease * 1.15);
+        p.alpha = p.baseAlpha * introFade * (0.8 + Math.sin(timestamp * 0.003 + p.seed) * 0.2);
+        // Slight ambient float in starting scattered positions
+        p.x = p.startX + Math.sin(timestamp * 0.0015 + p.seed) * 3;
+        p.y = p.startY + Math.cos(timestamp * 0.0018 + p.seed) * 3;
       }
 
-      if (formProgress >= 1) {
+      if (elapsed > 500) {
+        state = 'forming';
+      }
+    }
+
+    // 2. Swarm Convergence Phase (0.5s -> 3.0s): Dots sweep in from whole screen into "KRUSHNA"
+    if (state === 'forming') {
+      const rawProgress = Math.min(1, (elapsed - 500) / 2500);
+
+      let allDone = true;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        // Account for individual particle delay for natural organic flight
+        const pProgress = Math.min(1, Math.max(0, (rawProgress - p.delay) / (1 - p.delay)));
+        const ease = easeOutCubic(pProgress);
+
+        // Quadratic Bezier curve from whole screen to central target
+        const inv = 1 - ease;
+        p.x = inv * inv * p.startX + 2 * inv * ease * p.midX + ease * ease * p.centerTargetX;
+        p.y = inv * inv * p.startY + 2 * inv * ease * p.midY + ease * ease * p.centerTargetY;
+        p.alpha = Math.min(p.baseAlpha, 0.2 + ease * 0.85);
+
+        if (pProgress < 1) allDone = false;
+      }
+
+      if (rawProgress >= 1 && allDone) {
         state = 'formed';
       }
     }
 
-    // 3. Formed pause (2.6s -> 3.6s): Clean stationary appreciation with subtle breathing
+    // 3. Formed pause (3.0s -> 4.0s): Stationary appreciation with subtle breathing shimmer
     if (state === 'formed') {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
@@ -331,12 +406,12 @@
         p.alpha = p.baseAlpha;
       }
 
-      if (elapsed > 3600) {
+      if (elapsed > 4000) {
         state = 'energy';
       }
     }
 
-    // 4. Energy / Lightning charging phase (3.6s -> 4.6s)
+    // 4. Energy / Lightning charging phase (4.0s -> 5.0s)
     if (state === 'energy') {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
@@ -351,17 +426,18 @@
         lastLightningTime = timestamp;
       }
 
-      if (elapsed > 4600) {
-        triggerCinematicFlash();
+      if (elapsed > 5000) {
+        triggerDawnTransition();
       }
     } else {
       lightningArcs = [];
     }
 
-    // 5. Smooth Kinetic Glide (Mathematical Cubic Interpolation)
-    if (state === 'moving') {
-      const progress = Math.min(1, (timestamp - moveStartTime) / moveDuration);
-      const eased = easeInOutCubic(progress);
+    // 5. 4 AM Sunlight Dawn Transition & Silky Glide (5.0s -> 7.4s)
+    let dawnProgress = 0;
+    if (state === 'dawn') {
+      dawnProgress = Math.min(1, (timestamp - dawnStartTime) / dawnDuration);
+      const eased = easeInOutCubic(dawnProgress);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
@@ -370,13 +446,13 @@
         p.size = p.baseSize * (1.0 - (1.0 - 0.84) * eased);
       }
 
-      // Smoothly orchestrate UI fade-in during the glide
-      if (progress >= 0.55) {
+      // Smoothly orchestrate UI fade-in midway through the dawn sunlight
+      if (dawnProgress >= 0.55) {
         revealHeroUI();
       }
 
       // Settled in final position
-      if (progress >= 1.0) {
+      if (dawnProgress >= 1.0) {
         state = 'settled';
       }
     }
@@ -390,6 +466,11 @@
         p.x = p.toX + shimmerX;
         p.y = p.toY + shimmerY;
       }
+    }
+
+    // Draw 4 AM Sunlight Dawn Bloom (behind particles)
+    if (state === 'dawn') {
+      draw4AMSunlight(dawnProgress);
     }
 
     // Render all particles
